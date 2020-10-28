@@ -1,0 +1,28 @@
+<div class="container">
+
+<mat-card>
+	<mat-card-title>raag's gif converter</mat-card-title>
+
+	<mat-card-content>
+		<div *ngIf="loading" class="progress">
+			<mat-progress-bar  mode="indeterminate"></mat-progress-bar>
+		</div>
+		
+		<div>
+			<mat-file-upload
+				[labelText]="'Convert a video to gif'"
+				[selectButtonText]="'Select you video'"
+				[uploadButtonText]="'Convert'"
+				[allowMultipleFiles]="false"
+				[showUploadButton]="true"
+				[customSvgIcon]="null"
+				[acceptedTypes]="'*.*'"
+				(selectedFilesChanged)="onFileSelected()"
+				(uploadClicked)="onConvertButtonClicked($event)" >
+		</mat-file-upload>
+		</div>
+		<div *ngIf="error" class="error">{{ error }}</div>
+	</mat-card-content>
+</mat-card>
+
+</div>
