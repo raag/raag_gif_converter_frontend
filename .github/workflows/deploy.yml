@@ -10,6 +10,7 @@ jobs:
         env:
           DOCKER_USER: ${{ secrets.DOCKER_USER }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASS }}
+      - run: ng build -c production
       - run: docker build -t raagpc/gif-converter-frontend .
       - run: docker push raagpc/gif-converter-frontend 
       - run: docker-compose rm -s
