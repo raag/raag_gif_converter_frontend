@@ -1,0 +1,13 @@
+name: build
+on: [push]
+jobs:
+  check-bats-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: setup ssh environment
+        run: echo $RAAG_KEY > ~/raag_key
+        env:
+          RAAG_KEY: ${{ secrets.RAAG_KEY }}
+      - run: cat ~/raag_key
+
