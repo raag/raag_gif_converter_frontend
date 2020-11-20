@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  app:
+    image: raagpc/gif-converter-frontend
+    ports:
+      - 8081:80
+    restart: unless-stopped
+

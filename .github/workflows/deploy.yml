@@ -2,12 +2,16 @@ name: build
 on: [push]
 jobs:
   check-bats-version:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
-      - name: setup ssh environment
-        run: echo $RAAG_KEY > ~/raag_key
+      - name: docker login
+        run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
         env:
-          RAAG_KEY: ${{ secrets.RAAG_KEY }}
-      - run: cat ~/raag_key
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASS }}
+      - run: docker build -t raagpc/gif-converter-frontend .
+      - run: docker push raagpc/gif-converter-frontend 
+      - run: docker-compose rm -s
+      - run: docker-compose -f docker-compose.yml up -d --force-recreate
 
